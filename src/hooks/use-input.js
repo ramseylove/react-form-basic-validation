@@ -4,8 +4,21 @@ const UseInput = (validateValue) => {
   const [enteredValue, setEnteredValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
-  const valueIsValid = validateValue(enteredValue);
+  let valueIsValid = validateValue(enteredValue);
   const hasError = !valueIsValid && isTouched;
+
+  // const validateEmail = (email) => {
+  //   if (email.trim() !== "" && emailValidator.test(email)) {
+  //     console.log("email valid");
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
+
+  // if (key === "email") {
+  //   valueIsValid = emailValidator.test(enteredValue);
+  // }
 
   const valueInputChangeHandler = (event) => {
     setEnteredValue(event.target.value);

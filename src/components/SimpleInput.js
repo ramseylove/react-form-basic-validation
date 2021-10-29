@@ -1,18 +1,11 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import UseInput from "../hooks/use-input";
 
 const emailValidator =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; //eslint-disable-line
 
+const isEmail = (value) => emailValidator.test(value);
 const SimpleInput = (props) => {
-  const validateEmail = (email) => {
-    if (email.trim() !== "" && emailValidator.test(email)) {
-      console.log('email valid')
-      return true;
-    } else {
-      return false;
-    }
-  }
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -29,14 +22,20 @@ const SimpleInput = (props) => {
     valueInputChangeHandler: emailChangeHandler,
     valueInputBlurHandler: emailBlurHandler,
     reset: resetEmailInput,
-  } = UseInput((value) => value.trim() !== "" && emailValidator.test(value));
+  } = UseInput("email", (value) => emailValidator.test(value));
 
+  let formIsValid = false;
+
+  if (enteredNameIsValid && enteredEmailIsValid) {
+    formIsValid = true;
+  }
 
   const formSubmissionHandler = (event) => {
     event.preventDefault();
-    if (emailInputHasError && nameInputHasError){
+    if (!formIsValid) {
       return;
     }
+    // console.log(emailValidator.test(enteredEmail));
 
     resetNameInput();
 
