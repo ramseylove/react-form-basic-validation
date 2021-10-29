@@ -9,10 +9,11 @@ const SimpleInput = (props) => {
     value: enteredName,
     isValid: enteredNameIsValid,
     hasError: nameInputHasError,
+    localValue: nameLocalValue,
     valueInputChangeHandler: nameChangeHandler,
     valueInputBlurHandler: nameBlurHandler,
     reset: resetNameInput,
-  } = UseInput((value) => value.trim() !== "");
+  } = UseInput("name", (value) => value.trim() !== "");
 
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
